@@ -3,348 +3,300 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Morishita Meat — Cortes Premium a Domicilio</title>
-  <meta name="description" content="Morishita Meat. Cortes premium seleccionados, entregados directamente a tu mesa. Servicio para consumidor final y precios preferenciales para chefs y restaurantes." />
+  <title>Morishita Meat — La carne más fina de la Tierra</title>
+  <meta name="description" content="Morishita Meat. Wagyu japonés A5, USDA Prime y cortes selectos entregados a tu mesa. Servicio premium 100% digital para consumidor final, chefs y restaurantes." />
   <link rel="canonical" href="https://morishitameat.vercel.app/" />
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://morishitameat.vercel.app/" />
-  <meta property="og:title" content="Morishita Meat — Cortes Premium a Domicilio" />
-  <meta property="og:description" content="Cortes premium seleccionados, entregados directamente a tu mesa. B2C y B2B para chefs y restaurantes." />
+  <meta property="og:title" content="Morishita Meat — La carne más fina de la Tierra" />
+  <meta property="og:description" content="Wagyu japonés A5, USDA Prime y cortes selectos entregados a tu mesa." />
   <meta property="og:image" content="https://morishitameat.vercel.app/assets/images/og-cover.jpg" />
   <meta property="og:locale" content="es_MX" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Morishita Meat — Cortes Premium a Domicilio" />
-  <meta name="twitter:description" content="Cortes premium seleccionados, entregados directamente a tu mesa." />
+  <meta name="twitter:title" content="Morishita Meat — La carne más fina de la Tierra" />
+  <meta name="twitter:description" content="Wagyu japonés A5, USDA Prime y cortes selectos entregados a tu mesa." />
   <meta name="twitter:image" content="https://morishitameat.vercel.app/assets/images/og-cover.jpg" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-  <!-- Schema.org LocalBusiness -->
+  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FoodEstablishment",
     "name": "Morishita Meat",
-    "description": "Carnicería premium 100% digital. Cortes seleccionados para consumidor final y chefs.",
+    "description": "Carnicería premium 100% digital. Wagyu japonés A5 y cortes selectos.",
     "url": "https://morishitameat.vercel.app",
     "servesCuisine": "Carnes premium",
     "areaServed": "México",
-    "sameAs": [
-      "https://instagram.com/morishitameat"
-    ]
+    "sameAs": ["https://instagram.com/morishitameat"]
   }
   </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-
-  <!-- Grain overlay -->
   <div class="grain" aria-hidden="true"></div>
 
-  <!-- NAV -->
-  <header class="nav">
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
     <div class="nav__inner">
-      <a href="#inicio" class="nav__brand">
-        <span class="nav__brand-jp">森下</span>
+      <div class="nav__left">
+        <button class="nav__burger" aria-label="Menú" aria-expanded="false"><span></span><span></span><span></span></button>
+        <nav class="nav__menu" aria-label="Principal">
+          <a href="index.html" aria-current="page">Inicio</a>
+          <a href="coleccion.html">Colección</a>
+          <a href="cultura.html">Cultura</a>
+        </nav>
+      </div>
+
+      <a href="index.html" class="nav__brand" aria-label="Morishita Meat — Inicio">
+        <svg class="brandmark" viewBox="0 0 60 68" aria-hidden="true">
+          <polygon class="brandmark__hex" points="30,3 55,17 55,51 30,65 5,51 5,17"></polygon>
+          <text class="brandmark__kanji" x="30" y="44" text-anchor="middle">肉</text>
+        </svg>
         <span class="nav__brand-en">Morishita Meat</span>
       </a>
-      <nav class="nav__menu" aria-label="Principal">
-        <a href="#productos">Productos</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#chefs">Chefs</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-      <a href="#contacto" class="btn btn--gold-outline nav__cta">Ordenar</a>
-      <button class="nav__burger" aria-label="Menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+
+      <div class="nav__right">
+        <a href="coleccion.html" class="nav__icon" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        </a>
+        <a href="#" class="nav__icon" aria-label="Carrito" data-cart-link>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 2H2"/></svg>
+          <span class="nav__cart-count" data-cart-count hidden>0</span>
+        </a>
+      </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="inicio" class="hero">
-    <div class="hero__bg" aria-hidden="true"></div>
-    <div class="hero__content">
-      <p class="eyebrow eyebrow--gold">森下 · Cortes Premium</p>
-      <h1 class="hero__title">
-        El corte<br/>
-        <em>perfecto</em>,<br/>
-        a tu puerta.
-      </h1>
-      <p class="hero__sub">
-        Selección obsesiva de carnes de origen. Servicio 100% digital con entrega a domicilio
-        para consumidor final, chefs y restaurantes.
-      </p>
-      <div class="hero__cta">
-        <a href="#productos" class="btn btn--gold">Ver cortes</a>
-        <a href="#chefs" class="btn btn--ghost">Soy chef / restaurante</a>
-      </div>
-      <div class="hero__meta">
-        <div><span class="meta-num">A5</span><span class="meta-label">Wagyu japonés</span></div>
-        <div><span class="meta-num">100%</span><span class="meta-label">Digital · a domicilio</span></div>
-        <div><span class="meta-num">B2B</span><span class="meta-label">Precios para chefs</span></div>
-      </div>
-    </div>
-    <div class="hero__scroll" aria-hidden="true">
-      <span>scroll</span>
-      <div class="hero__line"></div>
-    </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Wagyu A5</span><span>·</span>
-      <span>USDA Prime</span><span>·</span>
-      <span>Tomahawk</span><span>·</span>
-      <span>Ribeye</span><span>·</span>
-      <span>Picaña</span><span>·</span>
-      <span>New York</span><span>·</span>
-      <span>Short Rib</span><span>·</span>
-      <span>Wagyu A5</span><span>·</span>
-      <span>USDA Prime</span><span>·</span>
-      <span>Tomahawk</span><span>·</span>
-      <span>Ribeye</span><span>·</span>
-      <span>Picaña</span><span>·</span>
-      <span>New York</span><span>·</span>
-      <span>Short Rib</span><span>·</span>
-    </div>
-  </div>
-
-  <!-- PRODUCTOS -->
-  <section id="productos" class="products">
-    <div class="container">
-      <header class="section__head">
-        <p class="eyebrow">01 · Catálogo</p>
-        <h2 class="section__title">Nuestros <em>cortes</em></h2>
-        <p class="section__lede">
-          Una curaduría reducida y precisa. Cada pieza pasa por selección manual y
-          control de marmoleo antes de salir a entrega.
-        </p>
-      </header>
-
-      <div class="products__grid">
-        <article class="card">
-          <div class="card__media card__media--wagyu"></div>
-          <div class="card__body">
-            <p class="card__tag">Japón · A5</p>
-            <h3 class="card__title">Wagyu A5</h3>
-            <p class="card__desc">Marmoleo extremo, sabor mantecoso y textura sedosa. La cima del wagyu japonés.</p>
-            <a href="#contacto" class="card__cta">Consultar disponibilidad →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__media card__media--tomahawk"></div>
-          <div class="card__body">
-            <p class="card__tag">USA · Prime</p>
-            <h3 class="card__title">Tomahawk</h3>
-            <p class="card__desc">El corte de mayor presencia. Hueso largo, ojo de ribeye generoso, sabor intenso.</p>
-            <a href="#contacto" class="card__cta">Consultar disponibilidad →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__media card__media--ribeye"></div>
-          <div class="card__body">
-            <p class="card__tag">USA · Prime</p>
-            <h3 class="card__title">Ribeye</h3>
-            <p class="card__desc">El balance ideal entre grasa y carne. Jugoso, profundo, versátil para sartén o parrilla.</p>
-            <a href="#contacto" class="card__cta">Consultar disponibilidad →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__media card__media--newyork"></div>
-          <div class="card__body">
-            <p class="card__tag">USA · Prime</p>
-            <h3 class="card__title">New York</h3>
-            <p class="card__desc">Firme, magro y con borde de grasa que sella el sabor. Favorito de los puristas.</p>
-            <a href="#contacto" class="card__cta">Consultar disponibilidad →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__media card__media--picana"></div>
-          <div class="card__body">
-            <p class="card__tag">Sudamérica</p>
-            <h3 class="card__title">Picaña</h3>
-            <p class="card__desc">Corte estrella de la parrilla brasileña. Capa de grasa generosa, sabor profundo.</p>
-            <a href="#contacto" class="card__cta">Consultar disponibilidad →</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card__media card__media--shortrib"></div>
-          <div class="card__body">
-            <p class="card__tag">USA · Premium</p>
-            <h3 class="card__title">Short Rib</h3>
-            <p class="card__desc">Costilla con marmoleo notable. Ideal para parrilla coreana y cocciones lentas.</p>
-            <a href="#contacto" class="card__cta">Consultar disponibilidad →</a>
-          </div>
-        </article>
-      </div>
-
-      <p class="products__note">
-        ¿Buscas un corte específico? Trabajamos bajo pedido. <a href="#contacto">Escríbenos →</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- NOSOTROS -->
-  <section id="nosotros" class="about">
-    <div class="container about__grid">
-      <div class="about__visual" aria-hidden="true">
-        <div class="about__visual-inner">
-          <span class="about__kanji">肉</span>
+  <main class="page">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero__inner">
+        <p class="hero__kanji">森下</p>
+        <h1 class="hero__title">Morishita Meat</h1>
+        <p class="hero__sub">La carne más fina de la Tierra</p>
+        <div class="rule"><span class="rule__diamond"></span></div>
+        <div class="hero__cta">
+          <a href="coleccion.html" class="btn btn--gold-outline btn--lg">Descubre la cima</a>
         </div>
       </div>
-      <div class="about__copy">
-        <p class="eyebrow">02 · Nosotros</p>
-        <h2 class="section__title">Carnicería <em>digital</em>, criterio de chef.</h2>
-        <p class="about__lead">
-          Morishita Meat nace de la obsesión por el detalle que cultivamos en
-          <strong>Morishita Japanese Cuisine</strong>, nuestro omakase japonés. Después de
-          años buscando los mejores cortes para nuestros propios platos, decidimos abrirlos
-          al público.
-        </p>
-        <p>
-          No tenemos vitrinas ni mostradores. Somos una operación 100% digital: tú pides,
-          nosotros seleccionamos la pieza y la entregamos en tu casa, restaurante o cocina.
-        </p>
-        <ul class="about__list">
-          <li><span class="about__bullet">→</span> Selección manual de cada corte</li>
-          <li><span class="about__bullet">→</span> Cadena de frío controlada hasta tu puerta</li>
-          <li><span class="about__bullet">→</span> Atención personalizada por mensaje directo</li>
-          <li><span class="about__bullet">→</span> Posibilidad de entrega coordinada con servicios omakase</li>
-        </ul>
+      <div class="hero__stage" aria-hidden="true">
+        <div class="media-meat" style="position:absolute; inset:0;"></div>
+        <div class="hero__bokeh"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CHEFS / B2B -->
-  <section id="chefs" class="chefs">
-    <div class="container">
+    <!-- ============ MAESTRÍA Y CERTIFICACIÓN ============ -->
+    <section class="section container">
       <header class="section__head section__head--center">
-        <p class="eyebrow eyebrow--gold">03 · Para profesionales</p>
-        <h2 class="section__title">Chefs & <em>restaurantes</em></h2>
-        <p class="section__lede">
-          Programa B2B con precios preferenciales, entregas recurrentes y cortes a especificación.
-          Pensado para cocinas que no aceptan menos que excelente.
-        </p>
+        <p class="eyebrow eyebrow--gold">01 · Procedencia</p>
+        <h2 class="section__title">Maestría y certificación</h2>
+        <div class="rule"><span class="rule__diamond"></span></div>
       </header>
 
-      <div class="chefs__grid">
-        <div class="chefs__card">
-          <span class="chefs__num">01</span>
-          <h3>Precios preferenciales</h3>
-          <p>Lista mayorista con descuentos por volumen y acuerdos por temporada.</p>
+      <div class="cert-grid">
+        <article class="cert-card">
+          <div class="cert-card__media media-meat" style="background:radial-gradient(ellipse at 40% 30%, #2b3a23, #0c0f08);"></div>
+          <div class="cert-card__body">
+            <h3 class="cert-card__title">Compromiso del productor</h3>
+            <p class="cert-card__text">Métodos artesanales perfeccionados durante siglos en las colinas de Japón, transmitidos de generación en generación. Cada animal se cría con paciencia, alimentación cuidada y respeto por el oficio.</p>
+            <span class="cert-card__seal">Trazabilidad de origen</span>
+          </div>
+        </article>
+
+        <article class="cert-card">
+          <div class="cert-card__media media-meat"></div>
+          <div class="cert-card__body">
+            <h3 class="cert-card__title">Certificación Wagyu A5</h3>
+            <p class="cert-card__text">Origen garantizado y calidad incomparable, avalada por los estándares de clasificación más rigurosos del mundo. Solo la cúspide del marmoleo (BMS 10–12) llega a tu mesa.</p>
+            <span class="cert-card__seal">Sello A5 · BMS 12</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCIA Y LOGÍSTICA ============ -->
+    <section class="section" style="background:linear-gradient(180deg,#080808,#0a0a0a);">
+      <div class="container">
+        <header class="section__head section__head--center">
+          <p class="eyebrow eyebrow--gold">02 · La experiencia</p>
+          <h2 class="section__title">Experiencia y logística</h2>
+          <p class="section__sub">Comparativa de marmoleo BMS</p>
+        </header>
+
+        <div class="h-scroll-wrap">
+          <button class="h-scroll__arrow h-scroll__arrow--left" data-scroll="-1" aria-label="Anterior">‹</button>
+          <button class="h-scroll__arrow" data-scroll="1" aria-label="Siguiente">›</button>
+          <div class="h-scroll" id="bmsScroll">
+            <article class="bms-card">
+              <div class="bms-card__media media-meat"></div>
+              <div class="bms-card__body">
+                <p class="bms-card__grade">BMS 12</p>
+                <h3 class="bms-card__title">La cima</h3>
+                <p class="bms-card__text">Marmoleo máximo. La grasa intramuscular se funde a temperatura corporal: textura sedosa, sabor mantecoso.</p>
+              </div>
+            </article>
+            <article class="bms-card">
+              <div class="bms-card__media media-meat" style="background:radial-gradient(ellipse at 50% 50%, #8a3a30, #3a1210);"></div>
+              <div class="bms-card__body">
+                <p class="bms-card__grade">BMS 7</p>
+                <h3 class="bms-card__title">Calidad premium</h3>
+                <p class="bms-card__text">Equilibrio entre carne y grasa. Jugoso y profundo, con la estructura que aprecian los puristas.</p>
+              </div>
+            </article>
+            <article class="bms-card">
+              <div class="bms-card__media media-meat" style="background:radial-gradient(ellipse at 50% 50%, #9c4438, #46160f);"></div>
+              <div class="bms-card__body">
+                <p class="bms-card__grade">BMS 5</p>
+                <h3 class="bms-card__title">Carácter intenso</h3>
+                <p class="bms-card__text">Más magro, sabor robusto. El corte ideal para parrilla de fuego vivo y cortes de mayor presencia.</p>
+              </div>
+            </article>
+          </div>
         </div>
-        <div class="chefs__card">
-          <span class="chefs__num">02</span>
-          <h3>Cortes a tu especificación</h3>
-          <p>Grosores, porciones y limpieza a la medida de tu menú o servicio.</p>
-        </div>
-        <div class="chefs__card">
-          <span class="chefs__num">03</span>
-          <h3>Entregas programadas</h3>
-          <p>Calendario fijo o bajo demanda. Coordinamos con tu cocina sin fricciones.</p>
-        </div>
-        <div class="chefs__card">
-          <span class="chefs__num">04</span>
-          <h3>Línea directa</h3>
-          <p>Contacto privado con el equipo. Sin call centers ni intermediarios.</p>
+
+        <!-- Video chef -->
+        <div class="videoblock reveal" style="margin-top:2.4rem;">
+          <div class="media-meat" style="position:absolute; inset:0; background:radial-gradient(ellipse at 50% 40%, #2a2a2a, #0a0a0a);"></div>
+          <div class="videoblock__overlay"></div>
+          <button class="videoblock__play" aria-label="Reproducir video">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <span class="videoblock__caption">La mesa del chef · El arte de la preparación</span>
         </div>
       </div>
+    </section>
 
-      <div class="chefs__cta">
-        <a href="#contacto" class="btn btn--gold">Solicitar lista mayorista</a>
-      </div>
-    </div>
-  </section>
+    <!-- ============ EXPERIENCIA PREMIUM ============ -->
+    <section class="section container">
+      <header class="section__head section__head--center">
+        <p class="eyebrow eyebrow--gold">03 · El servicio</p>
+        <h2 class="section__title">Experiencia premium</h2>
+        <div class="rule"><span class="rule__diamond"></span></div>
+      </header>
 
-  <!-- CONTACTO -->
-  <section id="contacto" class="contact">
-    <div class="container contact__grid">
-      <div class="contact__copy">
-        <p class="eyebrow">04 · Contacto</p>
-        <h2 class="section__title">Hagamos<br/>el <em>pedido</em>.</h2>
-        <p class="contact__lede">
-          La forma más rápida de ordenar es por mensaje directo. Te responde una persona,
-          no un bot.
-        </p>
-
-        <div class="contact__channels">
-          <a href="#" class="contact__channel" data-channel="whatsapp">
-            <span class="contact__channel-label">WhatsApp</span>
-            <span class="contact__channel-value">+52 000 000 0000</span>
-          </a>
-          <a href="#" class="contact__channel" data-channel="instagram">
-            <span class="contact__channel-label">Instagram</span>
-            <span class="contact__channel-value">@morishitameat</span>
-          </a>
-          <a href="#" class="contact__channel" data-channel="email">
-            <span class="contact__channel-label">Email</span>
-            <span class="contact__channel-value">hola@morishitameat.com</span>
-          </a>
+      <div class="feature-grid">
+        <div class="feature reveal">
+          <div class="feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8 12 3l9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>
+          </div>
+          <h3>Empaque de lujo</h3>
+          <p>Cada pedido viaja en una caja de madera a la medida, sellada con el emblema Morishita.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="6" width="14" height="11" rx="1"/><path d="M15 9h4l3 3v5h-7z"/><circle cx="6" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg>
+          </div>
+          <h3>Cadena de frío segura</h3>
+          <p>Entrega con cadena de frío controlada de extremo a extremo. La pieza llega en su punto perfecto.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2 9 9l-7 .5 5.5 4.5L6 21l6-4 6 4-1.5-7L22 9.5 15 9z"/></svg>
+          </div>
+          <h3>Selección manual</h3>
+          <p>Cada corte pasa por revisión manual y control de marmoleo antes de salir a entrega.</p>
         </div>
       </div>
+    </section>
 
-      <form class="contact__form" id="contactForm" novalidate>
-        <div class="form__row">
-          <label>
-            <span>Nombre</span>
-            <input type="text" name="nombre" required />
-          </label>
-          <label>
-            <span>Teléfono</span>
-            <input type="tel" name="telefono" required />
-          </label>
+    <!-- ============ RESEÑAS ============ -->
+    <section class="section" style="background:var(--ink-2);">
+      <div class="container">
+        <header class="section__head section__head--center">
+          <p class="eyebrow eyebrow--gold">04 · Clientes</p>
+          <h2 class="section__title">Reseñas</h2>
+          <div class="rule"><span class="rule__diamond"></span></div>
+        </header>
+
+        <div class="reviews">
+          <article class="review reveal">
+            <div class="review__avatar media-meat" style="background:radial-gradient(circle at 50% 40%,#3a3a3a,#101010);"></div>
+            <div>
+              <div class="review__stars">★★★★★</div>
+              <p class="review__name">Chef Daniela Wang</p>
+              <p class="review__text">"El nivel de marmoleo es de otra liga. Mis comensales notan la diferencia desde el primer bocado. Servicio impecable y entrega puntual."</p>
+            </div>
+          </article>
+          <article class="review reveal">
+            <div class="review__avatar media-meat" style="background:radial-gradient(circle at 50% 40%,#33312c,#0e0d0b);"></div>
+            <div>
+              <div class="review__stars">★★★★★</div>
+              <p class="review__name">David Erdman</p>
+              <p class="review__text">"Atención personal de principio a fin. La caja de madera y la cadena de frío hacen sentir que recibes algo verdaderamente especial."</p>
+            </div>
+          </article>
         </div>
-        <label class="form__field">
-          <span>Soy</span>
-          <select name="tipo">
-            <option value="consumidor">Consumidor final</option>
-            <option value="chef">Chef / Restaurante</option>
-          </select>
-        </label>
-        <label class="form__field">
-          <span>¿Qué te interesa?</span>
-          <textarea name="mensaje" rows="4" placeholder="Cortes, cantidades, fechas…"></textarea>
-        </label>
-        <button type="submit" class="btn btn--gold btn--full">Enviar solicitud</button>
-        <p class="form__note" id="formNote" hidden></p>
-      </form>
-    </div>
-  </section>
+      </div>
+    </section>
 
-  <!-- FOOTER -->
+    <!-- ============ NEWSLETTER ============ -->
+    <section class="section container newsletter">
+      <p class="eyebrow eyebrow--gold">Únete al círculo íntimo</p>
+      <h2 class="section__title section__title--bone">Acceso anticipado</h2>
+      <p class="section__lede" style="margin-inline:auto;">Cortes limitados, lanzamientos privados y recetas de nuestros chefs. Sin spam.</p>
+      <div class="newsletter__box">
+        <p class="newsletter__label">Suscripción al boletín</p>
+        <form class="newsletter__form" id="newsletterForm" novalidate>
+          <input type="email" name="email" placeholder="Correo electrónico" required />
+          <button type="submit" class="btn btn--gold">Suscribir</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container footer__inner">
-      <div class="footer__brand">
-        <span class="footer__jp">森下</span>
+      <a href="index.html" class="footer__brand">
+        <svg class="brandmark" viewBox="0 0 60 68" aria-hidden="true">
+          <polygon class="brandmark__hex" points="30,3 55,17 55,51 30,65 5,51 5,17"></polygon>
+          <text class="brandmark__kanji" x="30" y="44" text-anchor="middle">肉</text>
+        </svg>
         <span class="footer__en">Morishita Meat</span>
+      </a>
+      <div class="footer__social">
+        <a href="https://instagram.com/morishitameat" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V7c0-1 .3-1.5 1.6-1.5H18V2h-3c-3 0-4 1.8-4 4v3H8v3.5h3V22h3.5v-9.5H17l.5-3.5z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="X / Twitter">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3h3l-7 8 8 10h-6l-5-6-5 6H2l8-9L2 3h6l4 5z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>
+        </a>
       </div>
-      <p class="footer__tag">Cortes premium · Entrega a domicilio · Ensenada, BC</p>
-      <p class="footer__copy">© <span id="year"></span> Morishita Meat. Todos los derechos reservados.</p>
+      <div class="footer__links">
+        <a href="cultura.html">Nosotros</a>
+        <a href="coleccion.html">Colección</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <p class="footer__copy">© <span id="year"></span> Morishita Meat · Cortes premium · Entrega a domicilio</p>
     </div>
   </footer>
 
-  <!-- Supabase -->
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+    <span id="toastMsg"></span>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

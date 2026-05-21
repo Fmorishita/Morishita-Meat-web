@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Producto — Morishita Meat</title>
+  <meta name="description" content="Detalle de corte premium Morishita Meat." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <button class="nav__burger" aria-label="Menú" aria-expanded="false"><span></span><span></span><span></span></button>
+        <nav class="nav__menu" aria-label="Principal">
+          <a href="index.html">Inicio</a>
+          <a href="coleccion.html">Colección</a>
+          <a href="cultura.html">Cultura</a>
+        </nav>
+      </div>
+      <a href="index.html" class="nav__brand" aria-label="Morishita Meat — Inicio">
+        <svg class="brandmark" viewBox="0 0 60 68" aria-hidden="true">
+          <polygon class="brandmark__hex" points="30,3 55,17 55,51 30,65 5,51 5,17"></polygon>
+          <text class="brandmark__kanji" x="30" y="44" text-anchor="middle">肉</text>
+        </svg>
+        <span class="nav__brand-en">Morishita Meat</span>
+      </a>
+      <div class="nav__right">
+        <a href="#" class="nav__icon" aria-label="Carrito" data-cart-link>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 2H2"/></svg>
+          <span class="nav__cart-count" data-cart-count hidden>0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="section container container--narrow">
+      <nav class="crumbs" aria-label="Ruta">
+        <a href="index.html">Inicio</a> / <a href="coleccion.html">Colección</a> / <span id="crumbName">Producto</span>
+      </nav>
+      <div class="pd" id="pd">
+        <!-- Renderizado por producto.js -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html" class="footer__brand">
+        <svg class="brandmark" viewBox="0 0 60 68" aria-hidden="true">
+          <polygon class="brandmark__hex" points="30,3 55,17 55,51 30,65 5,51 5,17"></polygon>
+          <text class="brandmark__kanji" x="30" y="44" text-anchor="middle">肉</text>
+        </svg>
+        <span class="footer__en">Morishita Meat</span>
+      </a>
+      <div class="footer__links">
+        <a href="index.html">Inicio</a>
+        <a href="coleccion.html">Colección</a>
+        <a href="cultura.html">Cultura</a>
+      </div>
+      <p class="footer__copy">© <span id="year"></span> Morishita Meat · Cortes premium · Entrega a domicilio</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+    <span id="toastMsg"></span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/producto.js"></script>
+</body>
+</html>

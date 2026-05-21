@@ -1,133 +1,150 @@
 /* ============================================================
-   MORISHITA MEAT — main.js
+   MORISHITA MEAT — main.js (núcleo compartido)
    ============================================================ */
 
 (() => {
   'use strict';
 
   /* ---------- Supabase ---------- */
-  // Credenciales públicas (anon key — seguras en frontend con RLS activo)
   const SUPABASE_URL      = 'https://ajoxbzmenrrpqxxzjyhf.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqb3hiem1lbnJycHF4eHpqeWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzNDMzMzAsImV4cCI6MjA5NDkxOTMzMH0.tsrS7f_WomK3I_YQfpZLeNfWD7wzTPHBCvdpX7kZcRs';
 
   let db = null;
   try {
-    if (SUPABASE_URL !== 'SUPABASE_URL_PLACEHOLDER' && window.supabase) {
-      db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    }
-  } catch (err) {
-    console.warn('Supabase no disponible:', err);
-  }
+    if (window.supabase) db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch (err) { console.warn('Supabase no disponible:', err); }
+
+  /* ---------- Helpers globales ---------- */
+  const CART_KEY = 'mm_cart';
+
+  const formatPrice = (n) =>
+    '$' + Number(n).toLocaleString('es-MX') + ' MXN';
+
+  const getCart = () => {
+    try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+    catch { return []; }
+  };
+  const saveCart = (cart) => localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
+  const updateCartCount = () => {
+    const total = getCart().reduce((s, it) => s + (it.qty || 1), 0);
+    document.querySelectorAll('[data-cart-count]').forEach(el => {
+      el.textContent = total;
+      el.hidden = total === 0;
+    });
+  };
+
+  const addToCart = (item) => {
+    const cart = getCart();
+    const key = `${item.id}__${item.peso}`;
+    const existing = cart.find(it => `${it.id}__${it.peso}` === key);
+    if (existing) existing.qty += 1;
+    else cart.push({ ...item, qty: 1 });
+    saveCart(cart);
+    updateCartCount();
+    toast(`Añadido: ${item.nombre} · ${item.peso}`);
+  };
+
+  let toastTimer;
+  const toast = (msg) => {
+    const t = document.getElementById('toast');
+    const m = document.getElementById('toastMsg');
+    if (!t || !m) return;
+    m.textContent = msg;
+    t.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('is-visible'), 2800);
+  };
+
+  // Exponer API mínima para coleccion.js / producto.js
+  window.MM = { formatPrice, getCart, addToCart, updateCartCount, toast, db };
 
   /* ---------- Año dinámico ---------- */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Nav: scroll shrink ---------- */
-  const nav = document.querySelector('.nav');
-  const onScroll = () => {
-    if (window.scrollY > 40) nav.classList.add('is-scrolled');
-    else nav.classList.remove('is-scrolled');
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  /* ---------- Nav: scroll + burger ---------- */
+  const nav = document.getElementById('nav');
+  if (nav) {
+    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-  /* ---------- Menú móvil ---------- */
-  const burger = document.querySelector('.nav__burger');
-  burger?.addEventListener('click', () => {
-    const open = nav.classList.toggle('is-open');
-    burger.setAttribute('aria-expanded', String(open));
+    const burger = nav.querySelector('.nav__burger');
+    burger?.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
+    nav.querySelectorAll('.nav__menu a').forEach(a =>
+      a.addEventListener('click', () => {
+        nav.classList.remove('is-open');
+        burger?.setAttribute('aria-expanded', 'false');
+      })
+    );
+  }
+
+  /* ---------- Carrito (placeholder visual) ---------- */
+  updateCartCount();
+  document.querySelectorAll('[data-cart-link]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const cart = getCart();
+      if (!cart.length) { toast('Tu carrito está vacío'); return; }
+      const total = cart.reduce((s, it) => s + it.precio * it.qty, 0);
+      toast(`${cart.reduce((s,it)=>s+it.qty,0)} artículo(s) · ${formatPrice(total)} — checkout próximamente`);
+    });
   });
-  // cerrar al hacer click en un link
-  document.querySelectorAll('.nav__menu a').forEach(a =>
-    a.addEventListener('click', () => {
-      nav.classList.remove('is-open');
-      burger?.setAttribute('aria-expanded', 'false');
-    })
-  );
 
   /* ---------- Reveal on scroll ---------- */
-  const revealSelectors = [
-    '.section__head',
-    '.card',
-    '.about__copy',
-    '.about__visual',
-    '.chefs__card',
-    '.contact__copy',
-    '.contact__form'
-  ];
-  const els = document.querySelectorAll(revealSelectors.join(','));
-  els.forEach(el => el.classList.add('reveal'));
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && els.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+    els.forEach(el => io.observe(el));
+  } else {
+    els.forEach(el => el.classList.add('is-visible'));
+  }
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        io.unobserve(entry.target);
-      }
+  /* ---------- Carrusel horizontal (BMS) ---------- */
+  const scroller = document.getElementById('bmsScroll');
+  document.querySelectorAll('[data-scroll]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!scroller) return;
+      const dir = Number(btn.dataset.scroll);
+      scroller.scrollBy({ left: dir * (scroller.clientWidth * 0.8), behavior: 'smooth' });
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
-  els.forEach(el => io.observe(el));
-
-  /* ---------- Formulario de contacto ---------- */
-  const form   = document.getElementById('contactForm');
-  const note   = document.getElementById('formNote');
-  const submit = form?.querySelector('[type="submit"]');
-
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const data     = new FormData(form);
-    const nombre   = (data.get('nombre')   || '').toString().trim();
-    const telefono = (data.get('telefono') || '').toString().trim();
-    const tipo     = (data.get('tipo')     || '').toString();
-    const mensaje  = (data.get('mensaje')  || '').toString().trim();
-
-    if (!nombre || !telefono) {
-      showNote('Por favor completa nombre y teléfono.', 'error');
-      return;
-    }
-
-    // Deshabilitar botón mientras procesa
-    if (submit) { submit.disabled = true; submit.textContent = 'Enviando…'; }
-
-    // 1 — Guardar en Supabase
-    if (db) {
-      try {
-        const { error } = await db.from('contactos').insert({
-          nombre,
-          telefono,
-          tipo,
-          mensaje: mensaje || null
-        });
-        if (error) console.warn('Supabase insert error:', error.message);
-      } catch (err) {
-        console.warn('Error al guardar contacto:', err);
-      }
-    }
-
-    // 2 — Abrir WhatsApp con mensaje pre-llenado
-    const tipoLabel = tipo === 'chef' ? 'Chef / Restaurante' : 'Consumidor final';
-    const text =
-      `Hola Morishita Meat, soy ${nombre} (${tipoLabel}).%0A` +
-      `Teléfono: ${telefono}%0A` +
-      (mensaje ? `Me interesa: ${mensaje}` : 'Me gustaría conocer disponibilidad y precios.');
-
-    // TODO: reemplazar 5210000000000 por el número real cuando lo tengamos
-    const whatsappURL = `https://wa.me/5210000000000?text=${text}`;
-    window.open(whatsappURL, '_blank', 'noopener');
-
-    showNote('¡Mensaje enviado! Abrimos WhatsApp para continuar.', 'ok');
-    form.reset();
-
-    if (submit) { submit.disabled = false; submit.textContent = 'Enviar solicitud'; }
   });
 
-  function showNote(msg, kind) {
-    if (!note) return;
-    note.textContent = msg;
-    note.hidden = false;
-    note.style.color = kind === 'error' ? '#e88' : '';
-  }
+  /* ---------- Video placeholder ---------- */
+  document.querySelector('.videoblock__play')?.addEventListener('click', () => {
+    toast('Video próximamente');
+  });
+
+  /* ---------- Newsletter → Supabase ---------- */
+  const nlForm = document.getElementById('newsletterForm');
+  nlForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = (new FormData(nlForm).get('email') || '').toString().trim();
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      toast('Ingresa un correo válido'); return;
+    }
+    const btn = nlForm.querySelector('button');
+    if (btn) { btn.disabled = true; }
+    if (db) {
+      try {
+        await db.from('contactos').insert({
+          nombre: 'Newsletter',
+          telefono: '-',
+          tipo: 'consumidor',
+          mensaje: `Suscripción boletín: ${email}`
+        });
+      } catch (err) { console.warn('No se guardó la suscripción:', err); }
+    }
+    toast('¡Gracias! Estás en el círculo íntimo.');
+    nlForm.reset();
+    if (btn) { btn.disabled = false; }
+  });
 })();
